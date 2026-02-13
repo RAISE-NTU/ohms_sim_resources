@@ -1,0 +1,3279 @@
+<sdf version='1.9'>
+  <world name='ohms_forest'>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.45 0.7 0.95 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <physics name='10ms' type='ignored'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <dart>
+        <collision_detector>bullet</collision_detector>
+        <solver>
+          <solver_type>dantzig</solver_type>
+        </solver>
+      </dart>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='ignition::gazebo::systems::Physics' filename='ignition-gazebo-physics-system'/>
+    <plugin name='ignition::gazebo::systems::Sensors' filename='ignition-gazebo-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin name='ignition::gazebo::systems::SceneBroadcaster' filename='ignition-gazebo-scene-broadcaster-system'/>
+    <plugin name='ignition::gazebo::systems::UserCommands' filename='ignition-gazebo-user-commands-system'/>
+    <plugin name='ignition::gazebo::systems::Imu' filename='libignition-gazebo-imu-system.so'/>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+
+    <!-- ==================== Manual Skybox (blue planes) ==================== -->
+    <model name='skybox'>
+      <static>true</static>
+      <!-- Top -->
+      <link name='sky_top'>
+        <visual name='visual'>
+          <geometry><plane><normal>0 0 -1</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.45 0.7 0.95 1</ambient>
+            <diffuse>0.45 0.7 0.95 1</diffuse>
+            <emissive>0.45 0.7 0.95 1</emissive>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <pose>0 0 200 0 0 0</pose>
+      </link>
+      <!-- Front (+X) -->
+      <link name='sky_front'>
+        <visual name='visual'>
+          <geometry><plane><normal>-1 0 0</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.45 0.7 0.95 1</ambient>
+            <diffuse>0.45 0.7 0.95 1</diffuse>
+            <emissive>0.45 0.7 0.95 1</emissive>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <pose>250 0 0 0 0 0</pose>
+      </link>
+      <!-- Back (-X) -->
+      <link name='sky_back'>
+        <visual name='visual'>
+          <geometry><plane><normal>1 0 0</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.45 0.7 0.95 1</ambient>
+            <diffuse>0.45 0.7 0.95 1</diffuse>
+            <emissive>0.45 0.7 0.95 1</emissive>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <pose>-250 0 0 0 0 0</pose>
+      </link>
+      <!-- Right (+Y) -->
+      <link name='sky_right'>
+        <visual name='visual'>
+          <geometry><plane><normal>0 -1 0</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.45 0.7 0.95 1</ambient>
+            <diffuse>0.45 0.7 0.95 1</diffuse>
+            <emissive>0.45 0.7 0.95 1</emissive>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <pose>0 250 0 0 0 0</pose>
+      </link>
+      <!-- Left (-Y) -->
+      <link name='sky_left'>
+        <visual name='visual'>
+          <geometry><plane><normal>0 1 0</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.45 0.7 0.95 1</ambient>
+            <diffuse>0.45 0.7 0.95 1</diffuse>
+            <emissive>0.45 0.7 0.95 1</emissive>
+          </material>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+        <pose>0 -250 0 0 0 0</pose>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+
+    <model name='forest_terrain'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://forest_terrain/meshes/remeseshed_test.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://forest_terrain/meshes/remeseshed_test.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 -8.0972 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>12 -8 0.226512 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-15 22 3.92607 0 -0 0.8</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>30 15 4.6458 0 -0 1.5</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 -18 -0.2 0 -0 2.1</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>20 5 -0.606712 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-10 -25 3.22253 0 -0 1.2</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>35 -20 -1.43212 0 -0 2.5</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-13.5357 14.4225 1.31092 0 -0 0.6</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>8 18 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-18 -5 -3.39515 0 -0 1</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>25 -30 -0.92586 0 -0 2</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-5 35 0.829568 0 -0 0.4</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinea_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinea/meshes/pinus_pinea.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-18 10.5862 -1.92917 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinea_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinea/meshes/pinus_pinea.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>15 30 2.33545 0 -0 1.8</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinea_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinea/meshes/pinus_pinea.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>38 8 -1.25626 0 -0 0.9</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinea_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinea/meshes/pinus_pinea.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 -28 -0.12791 0 -0 2.7</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinea_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinea/meshes/pinus_pinea.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-8 -35 0.39 0 -0 0.2</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>5 10 -0.573513 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 28 -0.282981 0 -0 1.4</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>28 -12 -3.2674 0 -0 2.8</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-12 -12 -3.69654 0 -0 0.7</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>3 4 -2.909 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-7 15 -0.05 0 -0 1.1</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>18 -15 -3.0567 0 -0 2.2</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-18 -22 -1.03793 0 -0 0.5</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>32 25 2.64151 0 -0 1.9</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>1 2 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-14 8 -2.51791 0 -0 0.6</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>22 12 -1.55 0 -0 1.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 -10 -3.56065 0 -0 2.4</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>10 -28 -0.277766 0 -0 0.1</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-5 -8 -3.53089 0 -0 3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='ulex_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://ulex/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 1.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>6 -3 -3.39272 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='ulex_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://ulex/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 1.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-16 -15 -3.36072 0 -0 1.5</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='ulex_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://ulex/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 1.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>24 20 1.63589 0 -0 0.8</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='ulex_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://ulex/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 1.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 25 0.13 0 -0 2.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='ulex_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://ulex/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 1.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>15 -22 -1.25929 0 -0 0.4</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>2 6 -2.37 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-9 -3 -3.3309 0 -0 0.9</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>14 8 -2.34 0 -0 1.7</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-20 18 -0.77 0 -0 2.6</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>9.04286 -17.6774 -3.03475 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='lavander_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://lavander/meshes/lavander.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-3 25 1.18 0 -0 1.2</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='rocks_0'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 -7.17887 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='rocks_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-18.032 5.34775 -6.74903 0.014282 -0.218691 1.59683</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='rocks_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>20.2777 -18.3275 -7.40653 0 -0 3.1</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='rocks_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://rocks/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-15 -30 -2.59239 0 -0 0.5</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>21.4796 -16.5055 0.226512 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>28.8987 -24.3434 1.4221 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>20.8459 -6.5438 0.301888 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>52.9253 -13.5564 0.226512 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>45.1462 -5.93045 0.226512 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_6'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>65.4735 6.06162 0.631443 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_redgum_0_7'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_redgum/meshes/euca_redgum.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>37.9659 23.7187 4.86284 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>15.0437 10.3899 1.7247 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>7.70003 10.68 1.89338 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>10.3185 5.42523 -0.684637 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>2.41171 5.05758 -1.18858 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-2.94373 4.4932 -1.00018 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='euca_globulus_0_6'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://euca_globulus/meshes/euc_glob.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.5 1.5 12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>0.557355 11.9515 1.61959 0 -0 0.3</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>13.8614 17.8482 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>16.7137 21.1087 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>19.982 20.1489 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>9.52863 22.5771 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>19.9815 26.2876 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='pinus_pinaster_0_6'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://pinus_pinaster/meshes/Pinus_Pinaster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 10</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>12.6571 26.6837 0.93 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-11.5679 -19.1693 -0.960588 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-5.04445 -13.0658 -3.50509 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_0_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>4.07261 -24.2717 -0.573513 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_3_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-8.34537 -4.82431 -3.5304 0 -0 0.7</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='scot_pine_3_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://scot_pine/meshes/Scot_pine.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1.2 1.2 8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-0.513979 -7.07007 -3.69654 0 -0 0.7</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>3.25125 -11.6864 -3.1604 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_1_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-4.04771 -2.12899 -3.12268 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_1_1_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>3.53752 -7.66582 -3.12268 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>3.50057 2.67714 -3.04401 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>4.68928 3.93064 -3.04401 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>2.42573 3.55861 -3.0044 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>1.92971 4.75292 -2.76625 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>5.22248 5.08773 -2.57361 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>5.3355 3.16397 -2.98827 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='tree_heather_0_2_6'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://tree_heather/meshes/tree_heather.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.8 0.8 3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>6.40768 4.76388 -2.65581 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-0.293095 2.39716 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>0.337506 0.958358 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_1'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-1.1359 1.37817 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_2'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-1.48868 2.80423 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_3'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-2.56214 1.57169 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_4'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-3.77058 2.71964 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_5'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-4.5274 1.29398 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='shrub_0_2_6'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/kalhan/Projects/OHMS_SIM/ohms_sim_ws/install/ohms_sim/share/ohms_sim/worlds/ohms_forest/model://shrub/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+      </link>
+      <pose>-4.93611 3.18107 -3.47607 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 50 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.1 -0.9</direction>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
