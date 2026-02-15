@@ -68,10 +68,10 @@
   </library_effects>
   <library_images>
     <image id="Erica_arborea_01_Leaf_01_albedo_jpg_001_jpg" name="Erica_arborea_01_Leaf_01_albedo_jpg_001_jpg">
-      <init_from>Erica_arborea_01_Leaf_01_albedo.jpg.001.jpg</init_from>
+      <init_from>Erica_arborea_01_Leaf_01_albedo.jpg</init_from>
     </image>
     <image id="Erica_arborea_01_Trunk_02_albedo_jpg_001_jpg" name="Erica_arborea_01_Trunk_02_albedo_jpg_001_jpg">
-      <init_from>Erica_arborea_01_Trunk_02_albedo.jpg.001.jpg</init_from>
+      <init_from>Erica_arborea_01_Trunk_02_albedo.jpg</init_from>
     </image>
   </library_images>
   <library_materials>
